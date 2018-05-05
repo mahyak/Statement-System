@@ -1,0 +1,49 @@
+﻿@using Statement.UI.Controllers
+@model LoginVm
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="~/statics/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/statics/lib/css/login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="col-sm-6">
+        <h2>Welcome to Statement System</h2>
+
+        <div>
+            <button class="log-btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Admin Login</button>
+            <a href="@Url.Action("Signin","Home")" class="log-lnk">User Login</a>
+        </div>
+
+
+        <div id="id01" class="modal">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "modal-content animate" }))
+            {
+                <div>
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+                <div class="container">
+                    @Html.LabelFor(a => a.UserName, new { @class = "lbl" })
+                    @Html.TextBoxFor(a => a.UserName, new { @class = "input-usrn", placeholder = "Enter Username" })
+                    @Html.ValidationMessageFor(a => a.UserName, "", new { @class = "help-block" })
+
+                    @Html.LabelFor(a => a.Password, new { @class = "lbl" })
+                    @Html.PasswordFor(a => a.Password, new { @class = "input-psw", placeholder = "Enter Password" })
+                    @Html.ValidationMessageFor(a => a.Password, "", new { @class = "help-block" })
+                    <button type="submit">Login</button>
+                </div>
+            }
+        </div>
+        <!--Scripts-->
+        <script src="~/src/Admin/js/login.js"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿@using Statement.Core.Dtos.Material
+@model IEnumerable<ListMaterialDto>
+
+@section Styles{
+   <link href="~/statics/lib/css/form.css" rel="stylesheet" />
+}
+
+<div class="col-sm-6">
+    @using (Html.BeginForm("List", "Material"))
+    {
+        <div class="pageTitle">
+            <strong>Material List</strong>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Action Button</th>
+                    </tr>
+                    @foreach (var material in Model)
+                    {
+                        <tr>
+                            <td>@material.Name</td>
+                            <td>
+                                <a href="@Url.Action("Edit","Material", new {id = material.Id})" class="btn-edit">
+                                    Edit
+                                </a>
+                            </td>
+                            <td>
+                                @using (Html.BeginForm("Delete", "Material"))
+                                {
+                                    @Html.Hidden("Id", material.Id)
+                                    <input type="submit" class="btn-del" value="Delete" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    }
+</div>

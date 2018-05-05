@@ -1,0 +1,69 @@
+﻿@using Statement.Core.Dtos.MaterialFactor
+@model ListMaterialFactorDto
+
+@section Styles{
+    <link href="~/statics/lib/css/multiSelection.css" rel="stylesheet" />
+    <link href="~/statics/lib/css/style.css" rel="stylesheet" />
+    <link href="~/statics/lib/sweetalert/dist/sweetalert.css" rel="stylesheet" />
+}
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<div>
+    @using (Html.BeginForm("Index", "MaterialFactor", FormMethod.Post))
+            {
+        <div class="card">
+            <div class="card-header">
+                <strong>Materials</strong>
+            </div>
+            <div class="container">
+                <div class="row style-select">
+                    <div class="col-md-12">
+                        <div class="subject-info-box-2">
+                            <label>Selected Material</label>
+                            <select name="MaterialExistDto" multiple class="form-control" id="lstBox2">
+                                @if (Model.MaterialExistDto != null)
+                                {
+                                    foreach (var materials in Model.MaterialExistDto)
+                                    {
+                                        <option value="@materials.Id">@materials.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="subject-info-arrows text-center">
+                            <br /><br />
+                            <input type='button' id='btnAllRight' value='>>' class="btn btn-default" /><br />
+                            <input type='button' id='btnRight' value='>' class="btn btn-default" /><br />
+                            <input type='button' id='btnLeft' value='<' class="btn btn-default" /><br />
+                            <input type='button' id='btnAllLeft' value='<<' class="btn btn-default" />
+                        </div>
+                        <div class="subject-info-box-1">
+                            <label>Not Selected Material</label>
+                            <select multiple class="form-control" id="lstBox1">
+
+                                @foreach (var material in Model.MaterialDto)
+                                {
+                                    <option value="@material.Id">@material.Name</option>
+                                }
+
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Save</button>
+                @Html.HiddenFor(a => a.ListMaterialExistDtoId)
+            </div>
+        </div>
+
+    }
+</div>
+@section Scripts{
+    <script src="~/statics/lib/jquery/dist/jquery.js"></script>
+    <script src="~/statics/lib/js/addAndRemoveMaterial.js"></script>
+    <script src="~/statics/lib/js/selectionList.js"></script>
+}

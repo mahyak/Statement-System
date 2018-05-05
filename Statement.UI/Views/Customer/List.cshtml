@@ -1,0 +1,59 @@
+﻿@using Statement.Core.Dtos.Customer
+@model IEnumerable<ListCustomerDto>
+@{ 
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+@section Styles{
+    <link href="~/statics/lib/css/form.css" rel="stylesheet" />
+}
+
+<div class="col-sm-6">
+    @using (Html.BeginForm("List", "Customer"))
+    {
+        <div class="pageTitle">
+            <strong>Customer List</strong>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Cell  Phone</th>
+                        <th>Email</th>
+                        <th>Factor</th>
+                        <th>Action Button</th>
+                    </tr>
+                    @foreach (var customer in Model)
+                    {
+                        <tr>
+                           
+                            <td>@customer.FirstName</td>
+                            <td>@customer.LastName</td>
+                            <td>@customer.CellPhone</td>
+                            <td>@customer.Email</td>
+                            <td>
+                                <a href="@Url.Action("List","Factor", new {id = customer.Id})" class="btn-factor">
+                                    Factor
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit","Customer", new {id = customer.Id})" class="btn-edit">
+                                    Edit
+                                </a>
+                            </td>
+                            <td>
+                                @using (Html.BeginForm("Delete", "Customer"))
+                                {
+                                    @Html.Hidden("Id", customer.Id)
+                                    <input type="submit" class="btn-del" value="Delete" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    }
+</div>

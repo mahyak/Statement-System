@@ -1,0 +1,78 @@
+﻿@using Statement.Core.Dtos.Factor
+@model IEnumerable<ListFactorDto>
+@{ 
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+@section Styles{
+    <link href="~/statics/lib/css/form.css" rel="stylesheet" />
+}
+
+@Html.Hidden("Id", ViewContext.RouteData.Values["id"])
+
+<div class="col-sm-6">
+    @using (Html.BeginForm("List", "Factor"))
+    {
+        <div class="card-header">
+            <strong>Factor List</strong>
+        </div>
+            <div class="card-header">
+                <br />
+                <a href="@Url.Action("Create", "Factor",
+                        new
+                        {
+                            id = ViewContext.RouteData.Values["id"],
+                            @class = "btn btn-sm btn-primary fa fa-plus"
+                        })">
+                    <strong>Add Factor</strong>
+                </a>
+            </div>
+        <div>
+            <br />
+            <table>
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Price</th>
+                        <th>Date</th>
+                        <th>Add Material</th>
+                        <th>List Material</th>
+                        <th>Action Button</th>
+                    </tr>
+                    @foreach (var factor in Model)
+                    {
+                        <tr>
+                           
+                            <td>@factor.CustomerName</td>
+                            <td>@factor.Price</td>
+                            <td>@factor.Date</td>
+                            <td>
+                                <a href="@Url.Action("List","MaterialFactor", new {id = factor.Id})" class="btn-factor">
+                                    List
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Index","MaterialFactor", new {id = factor.Id})" class="btn-factor">
+                                    Add
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit","Factor", new {id = factor.Id})" class="btn-edit">
+                                    Edit
+                                </a>
+                            </td>
+                            <td>
+                                @using (Html.BeginForm("Delete", "Factor"))
+                                {
+                                    @Html.Hidden("Id", factor.Id)
+                                    <input type="submit" class="btn-del" value="Delete" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    }
+</div>

@@ -1,0 +1,36 @@
+﻿@using Statement.Core.Dtos.MaterialFactor
+@model ListMaterialFactorDto
+
+@section Styles{
+    <link href="~/statics/lib/css/multiSelection.css" rel="stylesheet" />
+    <link href="~/statics/lib/css/style.css" rel="stylesheet" />
+    <link href="~/statics/lib/sweetalert/dist/sweetalert.css" rel="stylesheet" />
+}
+@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<div>
+    @using (Html.BeginForm("Index", "MaterialFactor", FormMethod.Post))
+            {
+        <div class="card">
+            <div class="card-header">
+                <strong>Materials</strong>
+            </div>
+            <table>
+
+                @foreach (var materials in Model.MaterialDto)
+                {
+                    <tr>
+                        <td>@materials.Name</td>
+                        <td>
+                            <input type="checkbox" name="material" value="@materials.Id" />
+                        </td>
+                    </tr>
+                }
+            </table>
+            <br>
+            <input type="submit" name="submit" value="submit" /><br>
+        </div>
+    }
+</div>

@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/statics/lib/css/layout.css" rel="stylesheet" />
+    @RenderSection("Styles", false)
+</head>
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="@Url.Action("List","Customer")">List Customer</a>
+        <a href="@Url.Action("Create","Customer")">Add Customer</a>
+        @RenderSection("Breadcram", false)
+    </div>
+    <div id="main">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+        @RenderBody()
+    </div>
+    <!--Scripts-->
+    <script src="~/statics/lib/js/navOpenClose.js"></script>
+    @RenderSection("Scripts", false)
+</body>
+</html>

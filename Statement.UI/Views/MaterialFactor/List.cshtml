@@ -1,0 +1,51 @@
+﻿@using Statement.Core.Dtos.MaterialFactor
+@model ListMaterialFactorDto
+
+ @{ 
+
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+@section Styles{
+    <link href="~/statics/lib/css/form.css" rel="stylesheet" />
+}
+
+<div class="col-sm-6">
+    @using (Html.BeginForm("List", "MaterialFactor"))
+    {
+        <div class="card-header">
+            <strong>Material Factor</strong>
+        </div>
+            <div>
+                <br />
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Material Name</th>
+                            
+                        </tr>
+                        @if (Model != null)
+                        {
+                            foreach (var materil in Model.MaterialExistDto)
+                            {
+                            <tr>
+                                <td>@materil.Name</td>
+                            </tr>
+                            }
+                        }
+
+                        @if(Model == null)
+                        {
+                            <tr><td>There is No material.</td></tr>
+                        }
+
+
+                </thead>
+
+                <tbody></tbody>
+
+            </table>
+
+        </div>
+    }
+</div>

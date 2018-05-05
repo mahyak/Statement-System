@@ -1,0 +1,48 @@
+﻿@using Statement.Core.Dtos.User
+@model IEnumerable<ListUserDto>
+
+@section Styles{
+   <link href="~/statics/lib/css/form.css" rel="stylesheet" />
+}
+
+<div class="col-sm-6">
+    @using (Html.BeginForm("List", "User"))
+    {
+        <div class="pageTitle">
+            <strong>User List</strong>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Action Button</th>
+                    </tr>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Username</td>
+                            <td>@user.FirstName</td>
+                            <td>@user.LastName</td>
+                            <td>
+                                <a href="@Url.Action("Edit","User", new {id = user.Id})" class="btn-edit">
+                                    Edit
+                                </a>
+                            </td>
+                            <td>
+                                @using (Html.BeginForm("Delete", "User"))
+                                {
+                                    @Html.Hidden("Id", user.Id)
+                                    <input type="submit" class="btn-del" value="Delete" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    }
+</div>
